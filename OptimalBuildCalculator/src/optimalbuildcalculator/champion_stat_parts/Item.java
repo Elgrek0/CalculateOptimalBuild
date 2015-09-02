@@ -35,7 +35,7 @@ public class Item {
         ItemBuild itemscopy = new ItemBuild();
 
         for (int i = 0; i < items.items.size(); i++) {//copy old inventory
-            itemscopy.items.push(items.items.get(i));
+            itemscopy.items.add(items.items.get(i));
         }
 
         int costcopy = item_cost;
