@@ -5,9 +5,9 @@
  */
 package optimalbuildcalculator.champion_stat_parts;
 
-import optimalbuildcalculator.errors.NotEnoughGoldError;
-import optimalbuildcalculator.errors.CouldntBuyError;
-import optimalbuildcalculator.errors.InventoryFullError;
+import optimalbuildcalculator.exceptions.NotEnoughGoldException;
+import optimalbuildcalculator.exceptions.CouldntBuyException;
+import optimalbuildcalculator.exceptions.InventoryFullException;
 import java.util.LinkedList;
 import optimalbuildcalculator.passives.Passive;
 
@@ -31,7 +31,7 @@ public class Item {
         this.components = components;
     }
 
-    ItemBuild make_test_ItemBuild(ItemBuild items) throws NotEnoughGoldError, InventoryFullError {
+    ItemBuild make_test_ItemBuild(ItemBuild items) throws NotEnoughGoldException, InventoryFullException {
         ItemBuild itemscopy = new ItemBuild();
 
         for (int i = 0; i < items.items.size(); i++) {//copy old inventory
@@ -52,10 +52,10 @@ public class Item {
                 itemscopy.gold = items.gold - costcopy;
                 return (itemscopy);
             } else {
-                throw new NotEnoughGoldError();
+                throw new NotEnoughGoldException();
             }
         } else {
-            throw new InventoryFullError();
+            throw new InventoryFullException();
 
         }
     }

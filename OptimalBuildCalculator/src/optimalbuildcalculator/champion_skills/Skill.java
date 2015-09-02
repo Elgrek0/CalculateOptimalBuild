@@ -13,7 +13,7 @@ import optimalbuildcalculator.passives.Passive;
  * @author Paris
  */
 public class Skill {
-
+    
     public final LinkedList<Float> base_ad_damage;
     public final LinkedList<Float> base_ad_ratio;
     public final LinkedList<Float> bonus_ad_ratio;
@@ -25,7 +25,7 @@ public class Skill {
 
     public final LinkedList<Passive> passives_onuse;
     public final LinkedList<Passive> passives_permanent;
-
+ 
     public Skill(LinkedList<Float> base_ad_damage, LinkedList<Float> base_ad_ratio, LinkedList<Float> bonus_ad_ratio, LinkedList<Float> base_ap_damage, LinkedList<Float> bonus_ap_ratio, LinkedList<Float> cooldown, LinkedList<Passive> passives_onuse, LinkedList<Passive> passives_permanent) {
         this.base_ad_damage = base_ad_damage;
         this.base_ad_ratio = base_ad_ratio;

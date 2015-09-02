@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package optimalbuildcalculator.errors;
+package optimalbuildcalculator.exceptions;
 
 /**
  *
  * @author Paris
  */
-public class CouldntBuyError extends Exception {
+public class InventoryFullException extends Exception {
 
-    public CouldntBuyError() {
+    public InventoryFullException() {
     }
     
 }

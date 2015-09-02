@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package optimalbuildcalculator.errors;
+package optimalbuildcalculator.exceptions;
 
 /**
  *
  * @author Paris
  */
-public class NoItemFoundError extends Exception {
+public class CouldntBuyException extends Exception {
 
-    public NoItemFoundError() {
+    public CouldntBuyException() {
     }
     
 }

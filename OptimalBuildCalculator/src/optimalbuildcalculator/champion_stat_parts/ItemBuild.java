@@ -5,12 +5,12 @@
  */
 package optimalbuildcalculator.champion_stat_parts;
 
-import optimalbuildcalculator.errors.NoItemFoundError;
+import optimalbuildcalculator.exceptions.NoItemFoundException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import optimalbuildcalculator.errors.InventoryFullError;
-import optimalbuildcalculator.errors.NotEnoughGoldError;
+import optimalbuildcalculator.exceptions.InventoryFullException;
+import optimalbuildcalculator.exceptions.NotEnoughGoldException;
 
 /**
  *
@@ -25,18 +25,20 @@ public class ItemBuild {
     private int pointer = 0;
 
     // get the next item in the list and return a temporary itembuild
-    public ItemBuild getnextitem(int gold) throws NoItemFoundError {
+    public ItemBuild getnextitem(int gold) throws NoItemFoundException {
         this.gold = gold;
         while (pointer < allitems.size()) {
+
             try {
                 ItemBuild i = allitems.get(pointer).make_test_ItemBuild(this);
                 return (i);
-            } catch (NotEnoughGoldError | InventoryFullError ex) {
+            } catch (NotEnoughGoldException | InventoryFullException ex) {
                 pointer++;
             }
+
         }
         pointer = 0;
-        throw new NoItemFoundError();
+        throw new NoItemFoundException();
 
     }
 
