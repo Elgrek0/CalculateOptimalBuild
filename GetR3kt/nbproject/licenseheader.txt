@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}This software is ment to be used only by skilled players.
+${licensePrefix}It wont work for noobs, such as these who main Karma or so.
+<#if licenseLast??>
+${licenseLast}
+</#if>
