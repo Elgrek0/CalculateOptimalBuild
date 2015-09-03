@@ -5,6 +5,10 @@
 package get.rekt.noob.storage;
 
 import constant.Region;
+import constant.staticdata.ChampData;
+import constant.staticdata.ItemListData;
+import constant.staticdata.MasteryListData;
+import constant.staticdata.RuneListData;
 import dto.Static.ChampionList;
 import dto.Static.ItemList;
 import dto.Static.MasteryList;
@@ -115,43 +119,46 @@ public class DataCenter {
         });
 
         if ((managementMode.getValue() & DataManagementMode.DOWNLOAD.getValue()) == 1) {
-            if (!_deserializedAllData) {
-                tasks.add(new DataTask() {
 
-                    @Override
-                    public void run() {
-                        try {
-                            RiotApi api = new RiotApi("2a555fa2-16f8-4597-9502-77e35df6faf4");
-                            System.out.println("downloading champion list");
-                            _championList = api.getDataChampionList();
-                            System.out.println("downloading mastery list");
-                            _masteryList = api.getDataMasteryList();
-                            System.out.println("downloading rune list");
-                            _runeList = api.getDataRuneList();
-                            System.out.println("downloading item list");
-                            _itemList = api.getDataItemList();
-                            System.out.println("downloading complete");
-                        } catch (RiotApiException ex) {
-                            Logger.getLogger(DataCenter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            tasks.add(new DataTask() {
 
-                        tasks.add(new DataTask() {
-
-                            @Override
-                            public void run() {
-                                System.out.println("saving champion list");
-                                DataLoader.Save(_championList, "ChampionList.lel");
-                                System.out.println("saving mastery list");
-                                DataLoader.Save(_masteryList, "MasteryList.lel");
-                                System.out.println("saving rune list");
-                                DataLoader.Save(_runeList, "RuneList.lel");
-                                System.out.println("saving item list");
-                                DataLoader.Save(_itemList, "ItemList.lel");
-                            }
-                        });
+                @Override
+                public void run() {
+                    if (_deserializedAllData) {
+                        return;
                     }
-                });
-            }
+                    try {
+                        RiotApi api = new RiotApi("2a555fa2-16f8-4597-9502-77e35df6faf4");
+                        System.out.println("downloading champion list");
+                        _championList = api.getDataChampionList(Region.EUNE, null, null, false, ChampData.ALL);
+                        System.out.println("downloading mastery list");
+                        _masteryList = api.getDataMasteryList(Region.EUNE, null, null, MasteryListData.ALL);
+                        System.out.println("downloading rune list");
+                        _runeList = api.getDataRuneList(Region.EUNE, null, null, RuneListData.ALL);
+                        System.out.println("downloading item list");
+                        _itemList = api.getDataItemList(Region.EUNE, null, null, ItemListData.ALL);
+                        System.out.println("downloading complete");
+                    } catch (RiotApiException ex) {
+                        Logger.getLogger(DataCenter.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    tasks.add(new DataTask() {
+
+                        @Override
+                        public void run() {
+                            System.out.println("saving champion list");
+                            DataLoader.Save(_championList, "ChampionList.lel");
+                            System.out.println("saving mastery list");
+                            DataLoader.Save(_masteryList, "MasteryList.lel");
+                            System.out.println("saving rune list");
+                            DataLoader.Save(_runeList, "RuneList.lel");
+                            System.out.println("saving item list");
+                            DataLoader.Save(_itemList, "ItemList.lel");
+                        }
+                    });
+                }
+            });
+
         }
         thread.start();
         if (tasks.isEmpty()) {

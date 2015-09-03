@@ -6,6 +6,7 @@ package get.rekt.noob.storage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,20 +21,14 @@ class DataLoader {
 
     public static String DataDirectory = System.getProperty("user.dir") + "/FileData/";
 
-    public static <T extends Serializable> T Load(String fileName) {
+    public static <T extends Serializable> T Load(String fileName) throws Exception {
         T e = null;
-        try {
             FileInputStream fileIn = new FileInputStream(DataDirectory + fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             e = (T) in.readObject();
             in.close();
             fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("class not found");
-            c.printStackTrace();
-        }
+        
         return e;
     }
 
