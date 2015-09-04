@@ -49,4 +49,18 @@ public class ItemBuild {
         }
         total_item_stats = sumstats;
     }
+
+    public void additem(Item item) throws InventoryFullException {
+        if (allitems.size() < 6) {
+            allitems.add(item);
+        } else {
+            throw new InventoryFullException();
+        }
+
+    }
+
+    public void removeitem(Item item) {
+        allitems.remove(item);
+
+    }
 }
