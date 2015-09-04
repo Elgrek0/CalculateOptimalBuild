@@ -80,6 +80,11 @@ public class Item {
         System.out.println("efficiency : " + item_value / item_cost * 100 + " %");
     }
 
+    @Override
+    public String toString() {
+        return (name);
+    }
+
     private double sum_item_value() {
         double sum = 0;
         sum += item_stats.getstat(Stats.health) * hpscost;

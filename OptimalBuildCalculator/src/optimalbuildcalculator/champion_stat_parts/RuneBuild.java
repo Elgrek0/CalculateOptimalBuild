@@ -20,7 +20,11 @@ public class RuneBuild {
     int blues = 0;
     int purple = 0;
 
-   public void addrune(Rune r) {
+    public RuneBuild() {
+        total_rune_stats = new Stats();
+    }
+
+    public void addrune(Rune r) {
         if (r.type == 0) {
             if (reds < 9) {
                 runes.add(r);

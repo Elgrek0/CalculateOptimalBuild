@@ -20,12 +20,15 @@ public class ItemBuild {
 
     public LinkedList<Item> items = new LinkedList<Item>();
     public Stats total_item_stats;
-    public static LinkedList<Item> allitems = new LinkedList<>();
     public int gold;
     private int pointer = 0;
 
+    public ItemBuild() {
+        total_item_stats = new Stats();
+    }
+
     // get the next item in the list and return a temporary itembuild
-    public ItemBuild getnextitem(int gold) throws NoItemFoundException {
+    public ItemBuild getnextitem(int gold, LinkedList<Item> allitems) throws NoItemFoundException {
         this.gold = gold;
         while (pointer < allitems.size()) {
 
@@ -51,8 +54,9 @@ public class ItemBuild {
     }
 
     public void additem(Item item) throws InventoryFullException {
-        if (allitems.size() < 6) {
-            allitems.add(item);
+        if (items.size() < 6) {
+            items.add(item);
+            calculatestats();
         } else {
             throw new InventoryFullException();
         }
@@ -60,7 +64,8 @@ public class ItemBuild {
     }
 
     public void removeitem(Item item) {
-        allitems.remove(item);
+        items.remove(item);
+        calculatestats();
 
     }
 }

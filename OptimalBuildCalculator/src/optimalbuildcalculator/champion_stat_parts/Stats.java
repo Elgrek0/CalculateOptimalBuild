@@ -64,6 +64,8 @@ public class Stats {
     public Stats(float[] stats) throws WrongStatsNumberException {
         if (stats.length != statcount) {
             throw new WrongStatsNumberException();
+        } else {
+            this.stats = stats;
         }
     }
 

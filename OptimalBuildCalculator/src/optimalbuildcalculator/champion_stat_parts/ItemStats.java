@@ -12,6 +12,7 @@ package optimalbuildcalculator.champion_stat_parts;
 public class ItemStats extends Stats {
 
     public ItemStats(double health, double mana, double attack_damage, double ability_power, double attack_speed, double critical_chance, double armor, double magic_resistance, double cooldown_reduction) {
+        super();
         stats[this.health] = (float) health;
         stats[this.mana] = (float) mana;
         stats[this.ability_power] = (float) ability_power;

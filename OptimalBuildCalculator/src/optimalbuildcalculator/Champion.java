@@ -32,6 +32,9 @@ public class Champion {
         this.champion_stats = champion_stats;
         this.skills = skills;
         this.champion_passive = champion_passive;
+        items = new ItemBuild();
+        masteries = new MasteryBuild();
+        runes = new RuneBuild();
     }
 
     public float get_total_stat(int stat, int level) {
@@ -55,5 +58,10 @@ public class Champion {
     public void print() {
         System.out.println("name : " + name);
         champion_stats.print_champion_stats();
+    }
+
+    @Override
+    public String toString() {
+        return (name);
     }
 }

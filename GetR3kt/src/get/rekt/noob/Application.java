@@ -70,6 +70,7 @@ public class Application {
             });
 
             for (int i = 0; i < allitems.size(); i++) {
+
                 allitems.remove(null);
             }
 
@@ -88,8 +89,8 @@ public class Application {
                 allitem.print();
                 System.out.println("");
             }
-
-            ChampionEditGui gui = new ChampionEditGui(allchampions.getLast());
+           
+            ChampionEditGui gui = new ChampionEditGui(allchampions.getLast(), allitems);
             gui.setVisible(true);
 
         } catch (Exception ex) {
