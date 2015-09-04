@@ -139,6 +139,8 @@ public class Stats {
         print(health, "hp");
         print(mana, "mp");
         print(attack_damage, "ad");
+        print(attack_speed, "as");
+        print(critical_chance, "crit");
         print(ability_power, "ap");
         print(armor, "armor");
         print(magic_resistance, "mr");
