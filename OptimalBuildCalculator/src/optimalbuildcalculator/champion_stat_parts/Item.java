@@ -28,8 +28,8 @@ public class Item {
     public static double mrcost = 450.0 / 25;
     public static double apcost = 435.0 / 20;
     public static double adcost = 360.0 / 10;
-    public static double ascost = 400.0 / 15;
-    public static double critcost = 400.0 / 8;
+    public static double ascost = 450.0 / 0.15;
+    public static double critcost = 400.0 / 0.08;
     public static double hpscost = 400.0 / 150;
 
     public Item(String name, Stats item_stats, Passive item_passive, int item_cost, LinkedList<Item> components) {

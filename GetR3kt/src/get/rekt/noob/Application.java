@@ -6,7 +6,11 @@ package get.rekt.noob;
 
 import get.rekt.noob.storage.DataCenter;
 import get.rekt.noob.storage.DataManagementMode;
+import static java.util.Collections.list;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import optimalbuildcalculator.Champion;
@@ -49,16 +53,44 @@ public class Application {
             }
 
             for (dto.Static.Item i : DataCenter.getInstance().getItemList().getData().values()) {
+                if(i.getRequiredChampion() != null)
+                    continue;
                 dto.Static.BasicDataStats is = i.getStats();
-
+                
                 allitems.add(new Item(i.getName(), new ItemStats(is.getFlatHPPoolMod(), is.getFlatMPPoolMod(), is.getFlatPhysicalDamageMod(), is.getFlatMagicDamageMod(),
                         is.getPercentAttackSpeedMod(), is.getFlatCritChanceMod(),
                         is.getFlatArmorMod(), is.getFlatSpellBlockMod(), is.getrPercentCooldownMod()),
                         null, i.getGold().getTotal(), null));
-
-                allitems.getLast().print();
+            }
+            
+            allitems.replaceAll((Item t) -> {
+                return ((t.item_value / t.item_cost) == 0 || t.item_cost == 0) ? null : t;
+            });
+            
+            for (int i = 0; i < allitems.size(); i++) {
+                allitems.remove(null);
+            }
+            
+            allitems.sort((Item o1, Item o2) -> {
+                if((o1.item_value / o1.item_cost) > (o2.item_value / o2.item_cost))
+                {
+                    return 1;
+                }
+                if((o1.item_value / o1.item_cost) == (o2.item_value / o2.item_cost))
+                {
+                    return 0;
+                }
+                return -1;
+            });
+            
+            
+                        
+            for (Iterator<Item> it = allitems.iterator(); it.hasNext();) {
+                Item allitem = it.next();   
+                allitem.print();
                 System.out.println("");
             }
+            
             System.exit(0);
 
         } catch (Exception ex) {
