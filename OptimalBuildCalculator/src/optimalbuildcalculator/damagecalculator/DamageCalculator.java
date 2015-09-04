@@ -7,6 +7,7 @@ package optimalbuildcalculator.damagecalculator;
 
 import java.util.LinkedList;
 import optimalbuildcalculator.Champion;
+import optimalbuildcalculator.champion_stat_parts.Stats;
 
 /**
  *
@@ -30,18 +31,20 @@ public class DamageCalculator {
         if (debug) {
             System.out.println("------level " + level + " -------");
         }
-        float enemyarmor = defender.get_total_stat(Champion.armor, level);
+        float enemyarmor = defender.get_total_stat(Stats.armor, level);
         float armor_damage_multiplier = (float) (100.0 / (100 + enemyarmor));
-        float dps = attacker.get_total_stat(Champion.attack_speed, level)
-                * attacker.get_total_stat(Champion.attack_damage, level)
+        float dps = attacker.get_total_stat(Stats.attack_speed, level)
+                * attacker.get_total_stat(Stats.attack_damage, level)
                 * armor_damage_multiplier
-                * (1 + attacker.get_total_stat(Champion.critical_chance, level));
-        float burst = attacker.get_total_stat(Champion.attack_damage, level);
-        float time_to_kill = defender.get_total_stat(Champion.health, level) / dps;
+                * (1 + attacker.get_total_stat(Stats.critical_chance, level));
+        float burst = attacker.get_total_stat(Stats.attack_damage, level);
+        float time_to_kill = defender.get_total_stat(Stats.health, level) / dps;
 
         Result toreturn = new Result(time_to_kill, burst, dps);
         if (debug) {
-            System.out.println("enemy hp " + defender.get_total_stat(Champion.health, level));
+            System.out.println("attacker ad " + attacker.get_total_stat(Stats.attack_damage, level));
+            System.out.println("attacker as " + attacker.get_total_stat(Stats.attack_speed, level));
+            System.out.println("enemy hp " + defender.get_total_stat(Stats.health, level));
             System.out.println("enemy armor " + enemyarmor);
             toreturn.print();
         }

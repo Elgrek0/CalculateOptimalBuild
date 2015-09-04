@@ -8,6 +8,7 @@ package optimalbuildcalculator.champion_stat_parts;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import optimalbuildcalculator.exceptions.WrongStatsNumberException;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -15,22 +16,48 @@ import optimalbuildcalculator.exceptions.WrongStatsNumberException;
  */
 public class Stats {
 
-    public static final int health = 0;
-    public static final int health_per_level = 1;
-    public static final int attack_damage = 2;
-    public static final int attack_damage_per_level = 3;
-    public static final int attack_speed = 4;
-    public static final int attack_speed_per_level = 5;
-    public static final int critical_chance = 6;
-    public static final int critical_chance_per_level = 7;
-    public static final int cooldown_reduction = 8;
-    public static final int cooldown_reduction_per_level = 9;
-    public static final int armor = 10;
-    public static final int armor_per_level = 11;
-    public static final int magic_resistance = 12;
-    public static final int magic_resistance_per_level = 13;
+    static {
+        int i = 0;
+        health = i++;
+        health_per_level = i++;
+        mana = i++;
+        mana_per_level = i++;
+        ability_power = i++;
+        ability_power_per_level = i++;
+        attack_damage = i++;
+        attack_damage_per_level = i++;
+        attack_speed = i++;
+        attack_speed_per_level = i++;
+        critical_chance = i++;
+        critical_chance_per_level = i++;
+        cooldown_reduction = i++;
+        cooldown_reduction_per_level = i++;
+        armor = i++;
+        armor_per_level = i++;
+        magic_resistance = i++;
+        magic_resistance_per_level = i++;
+        statcount = i;
+    }
+    public static final int health;
+    public static final int health_per_level;
+    public static final int mana;
+    public static final int mana_per_level;
+    public static final int ability_power;
+    public static final int ability_power_per_level;
+    public static final int attack_damage;
+    public static final int attack_damage_per_level;
+    public static final int attack_speed;
+    public static final int attack_speed_per_level;
+    public static final int critical_chance;
+    public static final int critical_chance_per_level;
+    public static final int cooldown_reduction;
+    public static final int cooldown_reduction_per_level;
+    public static final int armor;
+    public static final int armor_per_level;
+    public static final int magic_resistance;
+    public static final int magic_resistance_per_level;
 
-    public static final int statcount = 14;
+    public static final int statcount;
 
     float[] stats;
 
@@ -86,7 +113,42 @@ public class Stats {
         stats[stat] = value;
     }
 
+    public void setstat(int stat, double value) {
+        stats[stat] = (float) value;
+    }
+
     public static float growth(float base, float growth, int level) {
+
+        //System.out.println("base : " + base);
+        //System.out.println("growth : " + growth);
         return (float) (base + growth * (7.0 / 400 * (level * level - 1) + 267.0 / 400 * (level - 1)));
     }
+
+    public void print_champion_stats() {
+        System.out.println("hp : " + stats[health]);
+        System.out.println("hp/lv : " + stats[health_per_level]);
+        System.out.println("mana : " + stats[mana]);
+        System.out.println("mana/lv : " + stats[mana_per_level]);
+        System.out.println("ad : " + stats[attack_damage]);
+        System.out.println("ad/lv : " + stats[attack_damage_per_level]);
+        System.out.println("armor : " + stats[armor]);
+        System.out.println("armor/lv : " + stats[armor_per_level]);
+    }
+
+    void print_item_stats() {
+        print(health, "hp");
+        print(mana, "mp");
+        print(attack_damage, "ad");
+        print(ability_power, "ap");
+        print(armor, "armor");
+        print(magic_resistance, "mr");
+        print(cooldown_reduction, "cdr");
+    }
+
+    void print(int value, String name) {
+        if (stats[value] != 0) {
+            System.out.println(name + " : " + stats[value]);
+        }
+    }
+
 }
